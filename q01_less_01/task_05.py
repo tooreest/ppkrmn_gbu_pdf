@@ -19,7 +19,7 @@ elif workresult == 0:
 else:
     print(f'Ваша фирма принесла прибыль {workresult} р.')
     profitability = (revenue - costs) / revenue
-    print(f'Рентабельность Вашей фирмы составила {profitability * 100:.2f} %')
+    print(f'Рентабельность Вашей фирмы составила {profitability:.2%}')
     employeers = int(input('Введите количество сотрудников в фирме: '))
     profit_on_emp = (revenue - costs) / employeers
     print(f'Каждый сотрудник заработал для фирмы {profit_on_emp:.2f} р.')
