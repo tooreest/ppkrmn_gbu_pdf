@@ -1,4 +1,4 @@
-0#!
+#!
 '''
 
 Geekbrains. Факультет python-разработки
@@ -11,3 +11,24 @@ Geekbrains. Факультет python-разработки
 Реализовать вывод данных о пользователе одной строкой.
 
 '''
+def user(fname, lname,  bdate,  city,  emali,  phone):
+    d = {'Имя': fname, 'Фамилия': lname,  'Дата рождения':  bdate,  'Город': city,  'E-mail': emali,  'Телефон': phone}
+    return d
+
+u_data = False
+while not u_data:
+    try:
+#        u_data = (input(f'Введите: Имя Фамилию дату рождения город_проживания email телефон: ')).split()
+        u_data = 'Иван Иванов 01.01.1985 Новгород-Северский login@server.ru +79876543210'.split()  # Верный тестовый ввод
+ #       u_data = '0'.split()  # Не верный тестовый ввод
+    except IndexError:
+        u_data = False
+        print ('Не корректный ввод.')
+    try:
+        u = user(fname=u_data[0], lname=u_data[1],  bdate=u_data[2],  city=u_data[3],  emali=u_data[4],  phone=u_data[5] )
+    except IndexError:
+        print(f'Количество данных не соответствует запросу.')
+        u_data = False
+
+print(f'Пользователь {u["Имя"]} {u["Фамилия"]} который родился {u["Дата рождения"]} проживает в городе {u["Город"]}.\n\
+Связаться с ни мможно по телефону {u["Телефон"]} или e-mail {u["E-mail"]}.')
