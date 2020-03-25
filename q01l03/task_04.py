@@ -15,13 +15,14 @@ Geekbrains. Факультет python-разработки
 Второй — более сложная реализация без оператора **, предусматривающая использование цикла.
 
 '''
-def my_expon(x,  y):
+def my_func(x,  y):
     ex = 1
     for i in range(abs(y)):
         ex *= x
-    return 1/ex
+    return ex if y > 0 else 1 / ex 
 
-x = 2
-y = -3
-print(f'Стандартный оператор - {x ** y}')
-print(f'Моя функция - {my_expon(x, y)}')
+x = 2.2
+y = -2
+print(f'Стандартный оператор -> {x ** y}')
+print(f'Моя функция -> {my_func(x, y)}')
+print('Bye!!!')

@@ -5,6 +5,7 @@ Geekbrains. Факультет python-разработки
 Четверть 1. Основы языка Python
 Урок 3. Функции
 Домашнее задание 6.
+
 Реализовать функцию int_func(), принимающую слово из маленьких латинских букв
 и возвращающую его же, но с прописной первой буквой.
 Например, print(int_func(‘text’)) -> Text.
@@ -15,3 +16,18 @@ Geekbrains. Факультет python-разработки
 Необходимо использовать написанную ранее функцию int_func().
 
 '''
+def my_func(word):
+    try:
+        lst = list(word)
+        lst[0] = chr(ord(lst[0]) - 32)
+    except IndexError:
+        pass  #Если при вводе слов в конце вставлен пробел, купируем ошибку
+    return ''.join(lst)
+    
+print(my_func('text'))
+
+str = list(input('Введите несколько слов разделяя пробелами:\n').split())
+for i in range(len(str)):
+    str[i] = my_func(str[i])
+print(' '.join(str))
+

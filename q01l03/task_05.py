@@ -14,3 +14,24 @@ Geekbrains. Факультет python-разработки
 то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
 
 '''
+def numsum(str):
+    lst = list(str.split())
+    summ = 0
+    q = True
+    for i in lst:
+        if i == 'q':
+            q = False
+            return (summ,  q)
+        else:
+            try:
+                summ += float(i)
+            except:
+                print('Type missmatch')
+    return summ,  q
+
+next = True
+while next:
+    numbs = input('Введите несколько чисел разделяя пробелами или "q" в любой момент для выхода:\n')
+    sum,  next = numsum(numbs)
+    print(sum)
+print('Bye!!!')

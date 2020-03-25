@@ -33,3 +33,4 @@ if str(result).replace('.', '').isdigit():
     print(f'{result:.2f}')
 else:
     print(f'{result}')
+print('Bye!!!')

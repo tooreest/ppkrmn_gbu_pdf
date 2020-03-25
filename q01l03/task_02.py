@@ -11,8 +11,8 @@ Geekbrains. Факультет python-разработки
 Реализовать вывод данных о пользователе одной строкой.
 
 '''
-def user(fname, lname,  bdate,  city,  emali,  phone):
-    d = {'Имя': fname, 'Фамилия': lname,  'Дата рождения':  bdate,  'Город': city,  'E-mail': emali,  'Телефон': phone}
+def user(fname, lname,  bdate,  city,  em,   phone):
+    d = {'Имя': fname, 'Фамилия': lname,  'Дата рождения':  bdate,  'Город': city,  'E-mail': em,  'Телефон': phone}
     return d
 
 u_data = False
@@ -25,10 +25,11 @@ while not u_data:
         u_data = False
         print ('Не корректный ввод.')
     try:
-        u = user(fname=u_data[0], lname=u_data[1],  bdate=u_data[2],  city=u_data[3],  emali=u_data[4],  phone=u_data[5] )
+        u = user(fname=u_data[0], lname=u_data[1],  bdate=u_data[2],  city=u_data[3],  em=u_data[4],  phone=u_data[5] )
     except IndexError:
         print(f'Количество данных не соответствует запросу.')
         u_data = False
 
 print(f'Пользователь {u["Имя"]} {u["Фамилия"]} который родился {u["Дата рождения"]} проживает в городе {u["Город"]}.\n\
 Связаться с ним можно по телефону {u["Телефон"]} или e-mail {u["E-mail"]}.')
+print('Bye!!!')

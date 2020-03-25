@@ -14,4 +14,5 @@ def my_func(a,  b, c):
     sum += float(a) if float(a) > float(c) else float(c)
     return sum
 ''' С проверкой валидности ввода заморачиваться не стал. Задание не в этом. '''
-print(my_func('27', '26',  '8'))
+print(my_func('27', '27.0001',  '26.99'))
+print('Bye!!!')
