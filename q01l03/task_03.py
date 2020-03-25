@@ -9,3 +9,9 @@ Geekbrains. Факультет python-разработки
 и возвращает сумму наибольших двух аргументов.
 
 '''
+def my_func(a,  b, c):
+    sum = float(a) if float(a) > float(b) else float(b)
+    sum += float(a) if float(a) > float(c) else float(c)
+    return sum
+''' С проверкой валидности ввода заморачиваться не стал. Задание не в этом. '''
+print(my_func('27', '26',  '8'))
