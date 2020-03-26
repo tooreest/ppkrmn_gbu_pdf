@@ -15,23 +15,28 @@ Geekbrains. Факультет python-разработки
 
 '''
 def numsum(str):
+    '''
+    В функции с целью "попробовать" задействована работа с глобальными переменными, хотя можно и без,
+    но добавится несколько строк кода как в функци так и в теле программы.
+    
+    '''
+    global next,  sum
     lst = list(str.split())
-    summ = 0
-    q = True
     for i in lst:
         if i == 'q':
-            q = False
-            return (summ,  q)
+            next = False
+            return
         else:
-            try:
-                summ += float(i)
+            try:  # если введено не число и не q, обрабатываем исключение, и перебираем дальше.
+                sum += float(i)
             except:
                 print('Type missmatch')
-    return summ,  q
+    return
 
-next = True
+next = True  # Переменная состояния. Если False завершаем цикл и выходим.
+sum = 0
 while next:
     numbs = input('Введите несколько чисел разделяя пробелами или "q" в любой момент для выхода:\n')
-    sum,  next = numsum(numbs)
+    numsum(numbs)
     print(sum)
 print('Bye!!!')

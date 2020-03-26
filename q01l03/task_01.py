@@ -10,15 +10,6 @@ Geekbrains. Факультет python-разработки
 
 '''
 def divis(a, b):
-    """
-    Функция принимает переменных типа string.
-    
-    Функция возвращает результат деления типа float, если строки можно преобразовать в тип float.
-    
-    Производится обработка исключений типа ZeroDivisionError и ValueError
-    с возвратом соответствующего сообщения
-    
-    """
     try:
         return float(a) / float(b)
     except ZeroDivisionError:

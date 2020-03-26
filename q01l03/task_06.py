@@ -17,17 +17,15 @@ Geekbrains. Факультет python-разработки
 
 '''
 def my_func(word):
-    try:
-        lst = list(word)
-        lst[0] = chr(ord(lst[0]) - 32)
-    except IndexError:
-        pass  #Если при вводе слов в конце вставлен пробел, купируем ошибку
+    lst = list(word)
+    lst[0] = chr(ord(lst[0]) - 32)  # В начале слова ввсети символ, то выведет другой, со сдвигом -32 в таблице символов
     return ''.join(lst)
     
-print(my_func('text'))
+str = 'text'
+print(f'{str} -> {my_func(str)}')
 
 str = list(input('Введите несколько слов разделяя пробелами:\n').split())
 for i in range(len(str)):
     str[i] = my_func(str[i])
 print(' '.join(str))
-
+print('Bye!!!')
