@@ -11,3 +11,8 @@ Geekbrains. Факультет python-разработки
 Для выполнения задания обязательно использовать генератор.
 
 '''
+
+mylist = [12,  125,  1548 , 1,  'geek',  23.156, 11, 1548, 'brains', 0, 'geek',  -45.23, -3, 11]
+result = [i for i in mylist if mylist.count(i) == 1]
+print(result)
+print('Bye!!!')

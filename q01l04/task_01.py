@@ -10,3 +10,21 @@ Geekbrains. Факультет python-разработки
 Для выполнения расчета для конкретных значений необходимо запускать скрипт с параметрами.
 
 '''
+
+from sys import argv
+
+
+try:
+    file, work_time, rate, prize = argv
+except ValueError:
+    print('Количество аргументов не верно')
+try:
+    print(f'Время работы: {float(work_time):.2f} часа')
+    print(f'Ставка: {float(rate):.2f} р./час.')
+    print(f'Премия: {float(prize):.2f} рублей.')
+    print(f'Заработная плата: {(float(work_time) * float(rate) + float(prize)):.2f} рублей.')
+except ValueError:
+    print('Неверно введены данные. Нужны цифры.')
+except NameError:
+    print('Данные не введены.')
+print('Bye!!!')

@@ -11,3 +11,29 @@ Geekbrains. Факультет python-разработки
 Подсказка: использовать функцию count() и cycle() модуля itertools.
 
 '''
+
+from itertools import count
+from itertools import cycle
+
+
+start = 3
+end = 17
+numlist = []
+for i in count(start):
+    if i < end:
+        numlist.append(i)
+    else:
+        break
+
+result = []
+num_of_element = len(numlist)*3
+for i in cycle(numlist):
+    if num_of_element > 0:
+        result.append(i)
+        num_of_element -= 1
+    else:
+        break
+
+print(f'Список чисел, сгенерированный с помощью count():\n{numlist}')
+print(f'Список чисел, сгенерированный из первого с помощью cycle():\n{result}')
+print('Bye!!!')
