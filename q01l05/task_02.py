@@ -26,17 +26,17 @@ def wordcount(str):
     return len(str.split())
 
 def charcount(str):
-    x =0
+    x = 0
     try:
         for i in str.replace(' ', ''):
             if i.isalpha():
-                x +=1
+                x += 1
     except UnboundLocalError:
         pass
     return x
 
 
-in_fname = 'out_task_01.txt'
+in_fname = '_in_task_02.txt'
 content = freadlns(in_fname)
 
 if __name__ == '__main__':
