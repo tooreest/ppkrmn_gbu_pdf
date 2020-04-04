@@ -25,13 +25,12 @@ class TrafficLight:
     (красный, желтый, зеленый) и количество повторений (по-умолчанию 3)
     '''
 
-
     __color = ['red', 'yellow', 'green']
-    def __init__ (self, redtime, yellowtime, greentime, numcycle = 3):
+    def __init__ (self, redtime, yellowtime, greentime, cycle_count = 3):
         self.redtime = redtime
         self.yellowtime = yellowtime
         self.greentime = greentime
-        self.numcycle = numcycle
+        self.cycle_count = cycle_count
 
     def running(self):
         from time import sleep
@@ -42,7 +41,7 @@ class TrafficLight:
                 }
         cycle = (TrafficLight.__color[0], TrafficLight.__color[1], TrafficLight.__color[2], TrafficLight.__color[1])
         start = 1
-        while self.numcycle >= start:
+        while self.cycle_count >= start:
             for i in cycle:
                 print('\033[2J')  # Clear screen
                 print(colorprint[i][0] + '00\n00\n' +
@@ -53,6 +52,8 @@ class TrafficLight:
                 sleep(colorprint[i][3])
             start += 1
 
+
 t = TrafficLight(7, 2, 5)
 t.running()
+
 print('Bye!!!')

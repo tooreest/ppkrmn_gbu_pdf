@@ -15,3 +15,34 @@ Geekbrains. Факультет python-разработки
 каждого экземпляра.
 
 '''
+class Stacionery:
+    def __init__(self,title):
+        self.title = title
+
+    def draw(self):
+        return f'{self.title} drawing start.'
+
+class Pen(Stacionery):
+    def draw(self):
+        return f'{self.title} writes letters.'
+
+class Pencil(Stacionery):
+    def draw(self):
+        return f'{self.title} draws a drawing.'
+
+class Handle(Stacionery):
+    def draw(self):
+        return f'{self.title} highlight text.'
+
+
+stacionery = Stacionery('Stacionery')
+pen = Pen('Pen')
+pencil = Pencil('Pencil')
+handle = Handle('Handle')
+
+lst = (stacionery, pen , pencil, handle)
+
+for i in lst:
+    print(i.draw())
+
+print('Bye!!!')
