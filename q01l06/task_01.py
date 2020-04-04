@@ -17,3 +17,42 @@ Geekbrains. Факультет python-разработки
 нарушении выводить соответствующее сообщение и завершать скрипт.
 
 '''
+
+
+class TrafficLight:
+    '''
+    Класс TrafficLight. Принимает тайминги работы каждого цвета
+    (красный, желтый, зеленый) и количество повторений (по-умолчанию 3)
+    '''
+
+
+    __color = ['red', 'yellow', 'green']
+    def __init__ (self, redtime, yellowtime, greentime, numcycle = 3):
+        self.redtime = redtime
+        self.yellowtime = yellowtime
+        self.greentime = greentime
+        self.numcycle = numcycle
+
+    def running(self):
+        from time import sleep
+        colorprint ={
+                TrafficLight.__color[0]:('\033[31m','\033[37m','\033[37m', self.redtime),
+                TrafficLight.__color[1]: ('\033[37m','\033[33m','\033[37m', self.yellowtime),
+                TrafficLight.__color[2]:('\033[37m', '\033[37m', '\033[32m', self.greentime)
+                }
+        cycle = (TrafficLight.__color[0], TrafficLight.__color[1], TrafficLight.__color[2], TrafficLight.__color[1])
+        start = 1
+        while self.numcycle >= start:
+            for i in cycle:
+                print('\033[2J')  # Clear screen
+                print(colorprint[i][0] + '00\n00\n' +
+                        colorprint[i][1] + '00\n00\n' +
+                        colorprint[i][2] + '00\n00\n' +
+                        '\033[37m'
+                        )
+                sleep(colorprint[i][3])
+            start += 1
+
+t = TrafficLight(7, 2, 5)
+t.running()
+print('Bye!!!')

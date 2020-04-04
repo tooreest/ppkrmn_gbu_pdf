@@ -16,3 +16,22 @@ name, surname, position (должность), income (доход). Послед�
 вызвать методы экземпляров).
 
 '''
+class Worker:
+    def __init__(self, name, surname, position, wage, bonus):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self._income =  {'wage':wage, 'bonus':bonus}
+
+class Position(Worker):
+    def get_full_name(self):
+        return f'{self.surname} {self.name}'
+
+    def get_total_income(self):
+        return f'{self._income["wage"] + self._income["bonus"]}'
+
+plumber = Position('Ivan', 'Ivanoff', 'plumber', 30000, 7500)
+electrician = Position('Peter', 'Petroff', 'electrician', 32000, 7000)
+
+print(f'{plumber.get_full_name()} - {plumber.get_total_income()}р.')
+print(f'{electrician.get_full_name()} - {electrician.get_total_income()}р.')
