@@ -6,9 +6,8 @@ Geekbrains. Факультет python-разработки
 Урок 6. Объектно-ориентированное программирование.
 Домашнее задание 4.
 Реализуйте базовый класс Car. У данного класса должны быть следующие атрибуты:
-speed, color, name, is_police (булево).
-А также методы: go, stop, turn(direction), которые должны сообщать,
-что машина поехала, остановилась, повернула (куда).
+speed, color, name, is_police (булево). А также методы: go, stop, turn(direction),
+которые должны сообщать, что машина поехала, остановилась, повернула (куда).
 Опишите несколько дочерних классов: TownCar, SportCar, WorkCar, PoliceCar.
 
 Добавьте в базовый класс метод show_speed, который должен
@@ -22,10 +21,10 @@ speed, color, name, is_police (булево).
 '''
 
 class Car:
-    def __init__(self, speed, color, name, is_police = False):
+    def __init__(self, name, color, speed, is_police = False):
+        self.name = name
         self.speed = speed
         self.color = color
-        self.name = name
         self.is_police = is_police
 
     def go(self):
@@ -41,14 +40,40 @@ class Car:
     def show_speed(self):
         return(f'Car moving with speed {self.speed} km/h')
 
+class TownCar(Car):
+    def show_speed(self):
+        if self.speed > 60:
+            return f'It is a towncar. You speed is high. Please slowly.'
+        else:
+            return f'Car moving with speed {self.speed} km/h'
+    
+class SportCar(Car):
+    #return f'This is sportcar. Press accelerator.'
+    pass
+
+class WorkCar(Car):
+    def show_speed(self):
+        if self.speed > 40:
+            return f'It is workcar. You speed is high. Please slowly.'
+        else:
+            return f'Car moving with speed {self.speed} km/h'
+
+class PoliceCar(Car):
+    pass
 
 
-class
+car  = Car('Opel', 'Silver',  60)
+townCar = TownCar('Chrysler', 'Blue',  65)
+sportCar  = SportCar('McLaren', 'Red',  120)
+workCar = WorkCar('Lada', 'Black',  45)
+policeCar = PoliceCar('Ford', 'Silver-Blue', 75,  True)
 
-car  = Car(60, 'Silver', 'Opel', 60)
 
 print(car.go())
 print(car.show_speed())
 print(car.turn('left'))
 print(car.turn('right'))
 print(car.stop())
+
+print(townCar.show_speed())
+print(workCar.show_speed())
