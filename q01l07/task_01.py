@@ -52,11 +52,12 @@ class Matrix:
         add = (self.lst[len(self.resultlst):]) if len(self.lst) > len(other.lst) else (other.lst[len(self.resultlst):])
         for i in add:
             self.resultlst.append(i)
-        return Matrix(self.resultlst)
+        return self.resultlst
 
 
 mx = Matrix([[1, 1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4]])
 xm = Matrix([[1, 1, 1], [2, 2, 2, 2, 2], [3, 3, 3], [4, 4, 4], [5], [6] ])
 print(mx)
 print(xm)
-print(mx + xm)
+mxxm = Matrix(mx + xm)
+print(mxxm)
