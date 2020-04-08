@@ -18,3 +18,33 @@ Geekbrains. Факультет python-разработки
 
 '''
 
+from abc import ABC
+from abc import abstractmethod
+
+class Clothes(ABC):
+    def __init__(self, name, param):
+        super().__init__()
+        self.name = name
+        self.param = param
+
+    @abstractmethod
+    def consumption(self):
+        pass
+
+class Costume(Clothes):
+    @property
+    def consumption(self):
+        return round(2*self.param + 0.3, 2)
+
+class Coat(Clothes):
+    @property
+    def consumption(self):
+        return round(self.param/6.5 + 0.5, 2)
+
+
+costume = Costume('Костюм', 1.8)
+coat = Coat('Пальто', 25)
+
+print(f'Для пошива {costume.name} нужно {costume.consumption} ткани.')
+print(f'Для пошива {coat.name} нужно {coat.consumption} ткани.')
+

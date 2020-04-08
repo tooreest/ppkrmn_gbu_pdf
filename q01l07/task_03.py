@@ -30,16 +30,48 @@ Geekbrains. Факультет python-разработки
 В классе необходимо реализовать метод make_order(), принимающий экземпляр
 класса и количество ячеек в ряду.
 Данный метод позволяет организовать ячейки по рядам.
-Метод должен возвращать строку вида **\n\n***..., где количество ячеек между \n
+Метод должен возвращать строку вида ****\n****\n***..., где количество ячеек между \n
 равно переданному аргументу. Если ячеек на формирование ряда не хватает,
 то в последний ряд записываются все оставшиеся.
 
 Например, количество ячеек клетки равняется 12, количество ячеек в ряду — 5.
-Тогда метод make_order() вернет строку: **\n\n.
+Тогда метод make_order() вернет строку: *****\n*****\n**\n.
 Или, количество ячеек клетки равняется 15, количество ячеек в ряду — 5.
-Тогда метод make_order() вернет строку: **\n\n***.
+Тогда метод make_order() вернет строку: *****\n*****\n*****\n.
 
 Подсказка: подробный список операторов для перегрузки доступен по ссылке.
 
 '''
 
+class OrganicCell:
+    def __init__(self, numcell):
+        self.numcell = int(numcell)
+    def __add__(self, other):
+        return self.numcell + other.numcell
+    def __sub__(self, other):
+        return self.numcell - other.numcell if self.numcell - other.numcell >0 else f'Не получится'
+    def __mul__(self, other):
+        return self.numcell * other.numcell
+    def __truediv__(self, other):
+        from math import ceil
+        return int((self.numcell / other.numcell)) if int((self.numcell / other.numcell)) > 1 else int(ceil(self.numcell / other.numcell))
+    def make_order(self, inrow):
+        self.inrow = int(inrow)
+        numfullrow = self.numcell // self.inrow
+        row = f'{"*" * inrow}\n'
+        lastrow = self.numcell % self.inrow
+        return f'\n{numfullrow * row}{lastrow * "*"}'
+
+
+c1 = OrganicCell(17.01)
+c2 = OrganicCell(4.99)
+sum = c1 + c2
+print(f'c1({c1.numcell}) + c2({c2.numcell}) = {sum}')
+diff = c1 - c2
+print(f'c1({c1.numcell}) - c2({c2.numcell}) = {diff}')
+mult = c1 * c2
+print(f'c1({c1.numcell}) * c2({c2.numcell}) = {mult}')
+div = c1 / c2
+print(f'c1({c1.numcell}) / c2({c2.numcell}) = {div}')
+print(c1.make_order(5))
+print(c2.make_order(5))

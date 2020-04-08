@@ -23,3 +23,40 @@ Geekbrains. Факультет python-разработки
 
 '''
 
+class Matrix:
+    def __init__ (self, lst):
+        self.lst = lst
+
+    def __str__(self):
+        self.lststr = ''
+        for i in self.lst:
+            for j in i:
+                self.lststr += f'{j} '
+            self.lststr += '\n'
+        return(self.lststr)
+
+    def __add__(self, other):
+        numrow = len(self.lst) if len(self.lst) >= len(other.lst) else len(other.lst)
+        self.resultlst = []
+        for i in range(numrow):
+            try:
+                row1, row2 = (self.lst[i], other.lst[i]) if len(self.lst[i]) >= len(other.lst[i]) else (other.lst[i], self.lst[i])
+                self.resultlst.append(row1)
+                for j in range(len(row1)):
+                    try:
+                        self.resultlst[i][j] += row2[j]
+                    except IndexError:
+                        pass
+            except IndexError:
+                pass
+        add = (self.lst[len(self.resultlst):]) if len(self.lst) > len(other.lst) else (other.lst[len(self.resultlst):])
+        for i in add:
+            self.resultlst.append(i)
+        return Matrix(self.resultlst)
+
+
+mx = Matrix([[1, 1, 1, 1], [2, 2, 2], [3, 3, 3], [4, 4]])
+xm = Matrix([[1, 1, 1], [2, 2, 2, 2, 2], [3, 3, 3], [4, 4, 4], [5], [6] ])
+print(mx)
+print(xm)
+print(mx + xm)
