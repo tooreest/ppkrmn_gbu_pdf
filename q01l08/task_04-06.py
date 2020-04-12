@@ -35,8 +35,8 @@ class Stock:
         self.equips = []
     def to_stock(self, *equips):
         for e in equips:
-            if len(self.equips) > self.places:
-                print(f'Склад заполнен. Перед добавлением товара на склад нужно освободить метсо')
+            if len(self.equips) > int(self.places)-1:
+                print(f'Склад заполнен. Перед добавлением товара на склад нужно освободить меcто')
             elif e in self.equips:
                print(f'Товар уже на складе.')
             else:
@@ -50,8 +50,7 @@ class Stock:
             else:
                 print(f'Товар на складе отсутствует')
     def __str__(self):
-        print(f'Товары на складе:')
-        return f'{self.equips}'
+        return f'Товары на складе: {self.equips}'
 
 class OffEquip(ABC):
     count = 0
@@ -93,7 +92,7 @@ class Xerox(OffEquip):
         print(f'Copy {self.txt} {self.numcopy} copy.')
         print(copylst)
 
-stock = Stock(30)
+stock = Stock(2)
 
 pr01 = Printer('HP', '1536','printer001')
 pr02 = Printer('Brother', '8065', 'printer002')
@@ -102,7 +101,7 @@ sc02 = Scanner('HP', '2710', 'scanner002')
 xx01 = Xerox('Canon', 'i_Sensis', 'xeoxr001')
 xx02 = Xerox('Xerox', 'X2450', 'xerox003')
 print(pr01)
-pr01.action('Text', 3)
+pr01.action('Text', 2)
 stock.to_stock(pr01, sc01, xx01)
 print(stock)
 stock.out_stock(sc01)
