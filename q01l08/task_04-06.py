@@ -45,14 +45,13 @@ class Stock:
     def out_stock(self, *equips):
         for e in equips:
             if e in self.equips:
-                self.equips.pop(e)
+                del self.equips[self.equips.index(e)]
                 print(f'{e} перемещен со склада.')
             else:
                 print(f'Товар на складе отсутствует')
     def __str__(self):
         print(f'Товары на складе:')
-        for i in self.equips:
-            print(f'{i}')
+        return f'{self.equips}'
 
 class OffEquip(ABC):
     count = 0
@@ -103,9 +102,9 @@ sc02 = Scanner('HP', '2710', 'scanner002')
 xx01 = Xerox('Canon', 'i_Sensis', 'xeoxr001')
 xx02 = Xerox('Xerox', 'X2450', 'xerox003')
 print(pr01)
-pr01.action('Text',3)
+pr01.action('Text', 3)
 stock.to_stock(pr01, sc01, xx01)
-#print(stock)
+print(stock)
 stock.out_stock(sc01)
 print(stock)
 
