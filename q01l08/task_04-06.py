@@ -41,10 +41,12 @@ class Stock:
                print(f'Товар уже на складе.')
             else:
                 self.equips.append(e)
+                print(f'{e} добавлен на склад.')
     def out_stock(self, *equips):
         for e in equips:
             if e in self.equips:
                 self.equips.pop(e)
+                print(f'{e} перемещен со склада.')
             else:
                 print(f'Товар на складе отсутствует')
     def __str__(self):
@@ -94,14 +96,16 @@ class Xerox(OffEquip):
 
 stock = Stock(30)
 
-pr01 = Printer('HP', '1536','0001')
-pr02 = Printer('Brother', '8065', '0001')
-sc01 = Scanner('Mustek', 'BearPaw', '001')
-sc02 = Scanner('HP', '2710', '001')
-xx01 = Xerox('Canon', 'i_Sensis', '001')
-xx02 = Xerox('Xerox', 'X2450', '001')
+pr01 = Printer('HP', '1536','printer001')
+pr02 = Printer('Brother', '8065', 'printer002')
+sc01 = Scanner('Mustek', 'BearPaw', 'scanner001')
+sc02 = Scanner('HP', '2710', 'scanner002')
+xx01 = Xerox('Canon', 'i_Sensis', 'xeoxr001')
+xx02 = Xerox('Xerox', 'X2450', 'xerox003')
 print(pr01)
 pr01.action('Text',3)
 stock.to_stock(pr01, sc01, xx01)
+#print(stock)
+stock.out_stock(sc01)
 print(stock)
 
