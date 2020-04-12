@@ -27,25 +27,48 @@ Geekbrains. Факультет python-разработки
 
 
 '''
+from abc import abstractmethod
+from abc import ABC
 class Stock:
     def __init__(self, places):
         self.places = places
         self.equips = []
+    def to_stock(self, *equips):
+        for e in equips:
+            if len(self.equips) > self.places:
+                print(f'Склад заполнен. Перед добавлением товара на склад нужно освободить метсо')
+            elif e in self.equips:
+               print(f'Товар уже на складе.')
+            else:
+                self.equips.append(e)
+    def out_stock(self, *equips):
+        for e in equips:
+            if e in self.equips:
+                self.equips.pop(e)
+            else:
+                print(f'Товар на складе отсутствует')
+    def __str__(self):
+        print(f'Товары на складе:')
+        for i in self.equips:
+            print(f'{i}')
 
-    def place_to_stock(self, equip):
-        self.equip = equip
-        self.equips.append(self.equip)
-        print(self.equips)
-
-class OffEquip:
+class OffEquip(ABC):
     count = 0
-    def __init__(self, manuf, model, sernumb):
+    def __init__(self, manuf, model, sernum):
         self.manuf = manuf
         self.model = model
-        self.sernumb = sernumb
+        self.sernum = sernum
+
+    @abstractmethod
+    def action(self):
+        pass
+
+    def __str__(self):
+        return f'Устройство {self.manuf} {self.model} серийный номер {self.sernum}'
+
 
 class Printer(OffEquip):
-    def printpage(self, txt, numcopy):
+    def action(self, txt, numcopy):
         '''Печатает текст txt  указанное количество раз.'''
         self.txt = txt
         self.numcopy = numcopy
@@ -53,13 +76,13 @@ class Printer(OffEquip):
             print(f'Print {self.txt} page copy {i}.')
 
 class Scanner(OffEquip):
-    def scanpage(self):
+    def action(self):
         scan = input(f'Enter original page: ')
         print(f'{self.model}. scan page {scan}')
 
 
 class Xerox(OffEquip):
-    def printpage(self, txt, numcopy):
+    def action(self, txt, numcopy):
         '''Печатает текст txt  указанное количество раз.'''
         self.txt = txt
         self.numcopy = numcopy
@@ -73,16 +96,12 @@ stock = Stock(30)
 
 pr01 = Printer('HP', '1536','0001')
 pr02 = Printer('Brother', '8065', '0001')
-
 sc01 = Scanner('Mustek', 'BearPaw', '001')
 sc02 = Scanner('HP', '2710', '001')
-
 xx01 = Xerox('Canon', 'i_Sensis', '001')
 xx02 = Xerox('Xerox', 'X2450', '001')
+print(pr01)
+pr01.action('Text',3)
+stock.to_stock(pr01, sc01, xx01)
+print(stock)
 
-
-#print(pr01.manuf, pr01. model, pr01.sernumb)
-#pr01.printpage('Text',3)
-#sc01.scanpage()
-
-stock.place_to_stock(pr01)
