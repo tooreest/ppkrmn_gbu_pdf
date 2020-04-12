@@ -21,5 +21,23 @@ Geekbrains. Факультет python-разработки
 и отобразить соответствующее сообщение. При этом работа скрипта не должна
 завершаться.
 
-
 '''
+class NoNumberError(Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+ulst = []
+while True:
+    uinp = input('Введите элемент списка: ')
+    try:
+        if uinp.lower() == 'stop':
+            break
+        elif not uinp.isdigit():
+            raise NoNumberError('Need enter digit')
+        else:
+            ulst.append(uinp)
+    except NoNumberError as err:
+        print(err)
+
+print(ulst)
+print('Bye!!!')

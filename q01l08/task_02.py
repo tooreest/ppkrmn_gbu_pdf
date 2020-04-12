@@ -11,3 +11,25 @@ Geekbrains. Факультет python-разработки
 и не завершиться с ошибкой.
 
 '''
+
+class DivZError(Exception):
+    def __init__(self, txt):
+        self.txt = txt
+
+def dvsn(x, y):
+    try:
+        if float(y) == 0:
+            raise DivZError('!!!Division By Zero!!!')
+        return float(x) / float(y)
+    except ValueError:
+        return f'Need a number'
+
+
+a, b = input(f' Введите делимое и делитель через пробел: ').split()
+try:
+    c = dvsn(a, b)
+except DivZError as err:
+    print(err)
+else:
+    print(c)
+print('Bye!!!')
