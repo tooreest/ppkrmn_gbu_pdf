@@ -32,12 +32,12 @@ $chmod 600 ./.my.cnf
 CREATE DATABASE IF NOT EXISTS example;
 USE example
 CREATE TABLE IF NOT EXISTS example.users (
-  id INT UNSIGNED,
-  name CHAR(25) COMMENT 'User name.' DEFAULT 'username'
+  `id` INT UNSIGNED,
+  `name` CHAR(25) COMMENT 'User name.' DEFAULT 'username'
   ) COMMENT='List of users';
 
 --3.
-/* 
+/*
 $mysqldump -hlocalhost example > ~/example.sql
 */
 
