@@ -17,8 +17,8 @@ Geekbrains. Факультет python-разработки.
 -- 1.
 /*
 $sudo apt install mysql
-$sudo systemctl enable mysql
-$sudo systemctl start mysql
+$sudo systemctl enable mysqld
+$sudo systemctl start mysqld
 
 $cat > ~/.my.cnf
 [client]
