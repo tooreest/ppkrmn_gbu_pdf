@@ -24,7 +24,7 @@ $cat > ~/.my.cnf
 [client]
 user=root
 password=supersecret
-chmod 600 ./.my.cnf
+$chmod 600 ./.my.cnf
 */
 
 -- 2.
