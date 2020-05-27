@@ -19,7 +19,8 @@ Geekbrains. Факультет python-разработки.
 $sudo apt install mysql
 $sudo systemctl enable mysqld
 $sudo systemctl start mysqld
-
+По умолчанию вход под пользователем root чеерз .my.cnf обычного пользователя
+не сработал поэтому:
 $sudo mysql
 mysql> CREATE USER 'toor'@'localhost' IDENTIFIED BY 'supersecret';
 mysql> GRANT ALL PRIVILEGES ON * . * TO 'toor'@'localhost';
