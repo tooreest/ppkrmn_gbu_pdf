@@ -20,9 +20,14 @@ $sudo apt install mysql
 $sudo systemctl enable mysqld
 $sudo systemctl start mysqld
 
+$sudo mysql
+mysql> CREATE USER 'toor'@'localhost' IDENTIFIED BY 'supersecret';
+mysql> GRANT ALL PRIVILEGES ON * . * TO 'toor'@'localhost';
+mysql> FLUSH PRIVILEGES;
+mysql> exit
 $cat > ~/.my.cnf
 [client]
-user=root
+user=toor
 password=supersecret
 $chmod 600 ./.my.cnf
 */
