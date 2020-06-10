@@ -10,11 +10,11 @@ Geekbrains. Факультет python-разработки.
 -- Create database
 DROP DATABASE if exists `vk`;
 CREATE DATABASE `vk`;
--- USE vk;
+USE `vk`;
 
 -- Create table with usernames and contacts
-DROP TABLE  IF EXISTS `vk`.`users`;
-CREATE TABLE `vk`.`users`(
+DROP TABLE  IF EXISTS `users`;
+CREATE TABLE `users`(
     `id` SERIAL,  -- or BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
     `firstname` VARCHAR(100),
     `lastname` VARCHAR(100),
@@ -26,8 +26,8 @@ CREATE TABLE `vk`.`users`(
 ) COMMENT 'Basic users info';
 
 -- create table with user info
-DROP TABLE IF EXISTS `vk`.`profiles`;
-CREATE TABLE `vk`.`profiles`(
+DROP TABLE IF EXISTS `profiles`;
+CREATE TABLE `profiles`(
     `user_id` BIGINT UNSIGNED NOT NULL UNIQUE,
     `gender` CHAR(1),
     `birthday` DATE,
@@ -35,27 +35,27 @@ CREATE TABLE `vk`.`profiles`(
     `created_at` DATETIME DEFAULT NOW()
 );
 
-ALTER TABLE `vk`.`profiles` ADD CONSTRAINT `fk_user_id`
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`)
+ALTER TABLE `profiles` ADD CONSTRAINT `fk_user_id`
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
     ON UPDATE CASCADE
     ON DELETE RESTRICT;
 
 -- create table for user messages
-DROP TABLE IF EXISTS `vk`.`messages`;
-CREATE TABLE `vk`.`messages`(
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages`(
     `id` SERIAL,
     `from_user_id` BIGINT UNSIGNED NOT NULL,
     `to_user_id` BIGINT UNSIGNED NOT NULL,
     `body` TEXT,
     `created_at` DATETIME DEFAULT NOW(),
     
-    FOREIGN KEY (`from_user_id`) REFERENCES `vk`.`users`(`id`),
-    FOREIGN KEY (`to_user_id`) REFERENCES `vk`.`users`(`id`)
+    FOREIGN KEY (`from_user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY (`to_user_id`) REFERENCES `users`(`id`)
 );
 
 -- create table for user friend requests
-DROP TABLE IF EXISTS `vk`.`friend_requests`;
-CREATE TABLE `vk`.`friend_requests`(
+DROP TABLE IF EXISTS `friend_requests`;
+CREATE TABLE `friend_requests`(
 --    `id` SERIAL,
     `from_user_id` BIGINT UNSIGNED NOT NULL,
     `to_user_id` BIGINT UNSIGNED NOT NULL,
@@ -63,43 +63,43 @@ CREATE TABLE `vk`.`friend_requests`(
     `updated_at` DATETIME ON UPDATE CURRENT_TIMESTAMP(),
     
     PRIMARY KEY (`from_user_id`, `to_user_id`),
-    FOREIGN KEY (`from_user_id`) REFERENCES vk.users(`id`),
-    FOREIGN KEY (`to_user_id`) REFERENCES vk.users(`id`),
+    FOREIGN KEY (`from_user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY (`to_user_id`) REFERENCES `users`(`id`),
     CHECK (`from_user_id` <> `to_user_id`)
 );
 
 -- create table for communities
-DROP TABLE IF EXISTS `vk`.`communities`;
-CREATE TABLE `vk`.`communities`(
+DROP TABLE IF EXISTS `communities`;
+CREATE TABLE `communities`(
     `id` SERIAL,
     `name` VARCHAR(200),
     `admin_user_id` BIGINT UNSIGNED NOT NULL,
     
     INDEX communities_name_idx(`name`),
-    FOREIGN KEY (`admin_user_id`) REFERENCES vk.users(`id`)
+    FOREIGN KEY (`admin_user_id`) REFERENCES `users`(`id`)
 );
 
 -- create table 
-DROP TABLE IF EXISTS `vk`.`users_communities`;
-CREATE TABLE `vk`.`users_communities`(
+DROP TABLE IF EXISTS `users_communities`;
+CREATE TABLE `users_communities`(
     `user_id` BIGINT UNSIGNED NOT NULL,
     `community_id` BIGINT UNSIGNED NOT NULL,
     
     PRIMARY KEY (`user_id`, `community_id`),
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`),
-    FOREIGN KEY (`community_id`) REFERENCES `vk`.`communities`(`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY (`community_id`) REFERENCES `communities`(`id`)
 );
 
 -- create table of media types
-DROP TABLE IF EXISTS `vk`.`media_types`;
-CREATE TABLE `vk`.`media_types`(
+DROP TABLE IF EXISTS `media_types`;
+CREATE TABLE `media_types`(
     `id` SERIAL,
     `name` VARCHAR(255)
 );
 
 -- create table for media content
-DROP TABLE IF EXISTS `vk`.`media`;
-CREATE TABLE `vk`.`media`(
+DROP TABLE IF EXISTS `media`;
+CREATE TABLE `media`(
     `id` SERIAL,
     `user_id` BIGINT UNSIGNED NOT NULL,
     `media_type_id` BIGINT UNSIGNED NOT NULL,
@@ -109,46 +109,45 @@ CREATE TABLE `vk`.`media`(
     `created_at` DATETIME DEFAULT NOW(),
     `updated_at` DATETIME ON UPDATE CURRENT_TIMESTAMP(),
     
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`),
-    FOREIGN KEY (`media_type_id`) REFERENCES `vk`.`media_types`(`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY (`media_type_id`) REFERENCES `media_types`(`id`)
 );
 
 -- create table for likes for content
-DROP TABLE IF EXISTS `vk`.`likes`;
-CREATE TABLE `vk`.`likes`(
+DROP TABLE IF EXISTS `likes`;
+CREATE TABLE `likes`(
     `id` SERIAL,
     `user_id` BIGINT UNSIGNED NOT NULL,
     `media_id` BIGINT UNSIGNED NOT NULL,
     `created_at` DATETIME DEFAULT NOW(),
 
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`),
-    FOREIGN KEY (`media_id`) REFERENCES `vk`.`media`(`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
+    FOREIGN KEY (`media_id`) REFERENCES `media`(`id`)
 );
 
 -- create table for photo album
-DROP TABLE IF EXISTS `vk`.`photo_albums`;
-CREATE TABLE `vk`.`photo_albums`(
+DROP TABLE IF EXISTS `photo_albums`;
+CREATE TABLE `photo_albums`(
     `id` SERIAL,
     `name` VARCHAR(255) default null,
     `user_id` BIGINT UNSIGNED default NULL,
 
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`),
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`),
     primary key (`id`)
 );
 
-DROP TABLE IF EXISTS `vk`.`photos`;
-CREATE TABLE `vk`.`photos`(
+DROP TABLE IF EXISTS `photos`;
+CREATE TABLE `photos`(
     `id` SERIAL,
     `album_id` BIGINT UNSIGNED NOT NULL,
     `media_id` BIGINT UNSIGNED NOT NULL,
 
-    FOREIGN KEY (`album_id`) REFERENCES `vk`.`photo_albums`(`id`),
-    FOREIGN KEY (`media_id`) REFERENCES `vk`.`media`(`id`)
+    FOREIGN KEY (`album_id`) REFERENCES `photo_albums`(`id`),
+    FOREIGN KEY (`media_id`) REFERENCES `media`(`id`)
 );
 
-/* For home work*/
-DROP TABLE IF EXISTS `vk`.`articles`; -- Пользовательские статьи
-CREATE TABLE `vk`.`articles`(
+DROP TABLE IF EXISTS `articles`; -- Пользовательские статьи
+CREATE TABLE `articles`(
     `id` SERIAL,
     `user_id` BIGINT UNSIGNED NOT NULL,
     `name` VARCHAR(255),
@@ -157,27 +156,26 @@ CREATE TABLE `vk`.`articles`(
     `updated_at` DATETIME ON UPDATE CURRENT_TIMESTAMP(),
     
     INDEX article_name_idx(`name`),
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
 );
 
-DROP TABLE IF EXISTS `vk`.`comments`; -- Комментарии
-CREATE TABLE `vk`.`comments`(
+DROP TABLE IF EXISTS `comments`; -- Комментарии
+CREATE TABLE `comments`(
     `id` SERIAL,
     `user_id` BIGINT UNSIGNED NOT NULL,
     `text` VARCHAR(500),
     `created_at` DATETIME DEFAULT NOW(),
     `updated_at` DATETIME ON UPDATE CURRENT_TIMESTAMP(),
     
-    FOREIGN KEY (`user_id`) REFERENCES `vk`.`users`(`id`)
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`)
 );
 
-DROP TABLE IF EXISTS `vk`.`articles_comments`;
-CREATE TABLE `vk`.`articles_comments`(
+DROP TABLE IF EXISTS `articles_comments`;
+CREATE TABLE `articles_comments`(
     `id` SERIAL,
     `article_id` BIGINT UNSIGNED NOT NULL,
     `comment_id` BIGINT UNSIGNED NOT NULL,
     
-    FOREIGN KEY (`article_id`) REFERENCES `vk`.`articles`(`id`),
-    FOREIGN KEY (`comment_id`) REFERENCES `vk`.`comments`(`id`)
+    FOREIGN KEY (`article_id`) REFERENCES `articles`(`id`),
+    FOREIGN KEY (`comment_id`) REFERENCES `comments`(`id`)
 );
-
