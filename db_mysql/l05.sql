@@ -122,8 +122,8 @@ FROM users;
 -- 7. Подсчитайте количество дней рождения, которые приходятся на каждый из дней
 --    недели. Следует учесть, что необходимы дни недели текущего года,
 --    а не года рождения.
-SELECT 
-DATE_FORMAT(CONCAT(DATE_FORMAT(NOW(), "%Y-"), DATE_FORMAT(`birthday`, '%m-%d')), '%w') as day_of_week, COUNT(*)
+SELECT
+DATE_FORMAT(CONCAT(DATE_FORMAT(NOW(), "%Y-"), DATE_FORMAT(`birthday`, '%m-%d')), '%w') AS day_of_week, COUNT(*)
 FROM `users`
 GROUP BY day_of_week
 ORDER BY day_of_week;
