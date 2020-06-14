@@ -37,17 +37,17 @@ USE `lbase`;
 -- Создаю таблицы со столбцами нужными для выполнения практического задания.
 
 -- Столбцы created_at и updated_at делаю типа VARCHAR для третьего задания.
-DROP TABLE `users`
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`(
     `id` SERIAL,
     `firstname` VARCHAR(100),
     `lastname` VARCHAR(100),
-    `created_at` VARCHAR(16),
-    `updated_at` VARCHAR(16)
+    `created_at` VARCHAR(20),
+    `updated_at` VARCHAR(20)
 );
 
 -- Создаю таблицу для 
-DROP TABLE `storehouses_products`
+DROP TABLE IF EXISTS `storehouses_products`;
 CREATE TABLE `storehouses_products`(
     `id` SERIAL,
     `product_name` VARCHAR(100),
@@ -97,15 +97,22 @@ SET `created_at` = DATE_FORMAT(NOW(), '%d.%m.%Y %H:%i'),
 -- 2. Необходимо преобразовать поля в таблице users, столбцы created_at и
 --    updated_at к типу DATETIME, сохранив введеные ранее значения.
 
-
-ALTER TABLE `table` 
-CHANGE COLUMN `created_at` `created_at` DATETIME;
-ALTER TABLE `table` 
+UPDATE `users`
+SET `created_at` = STR_TO_DATE( `created_at`, '%d.%m.%Y %H:%i'),
+    `updated_at` = STR_TO_DATE( `updated_at`, '%d.%m.%Y %H:%i')
+;
+ALTER TABLE `users` 
+CHANGE COLUMN `created_at` `created_at` DATETIME,
 CHANGE COLUMN `updated_at` `updated_at` DATETIME;
-
 
 -- 3. Отсортировать записи в таблице storehouses_products таким образом,
 --    чтобы они выводились в порядке увеличения значения value.
 --    Однако, нулевые запасы должны выводиться в конце, после всех записей.
+SELECT * 
+FROM `storehouses_products`
+ORDER BY IF (`value` = 0,1,0), `value`;
 
-
+-- 6. Подсчитайте средний возраст пользователей в таблице users
+-- 7. Подсчитайте количество дней рождения, которые приходятся на каждый из дней
+--    недели. Следует учесть, что необходимы дни недели текущего года,
+--    а не года рождения.
