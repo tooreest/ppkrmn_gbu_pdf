@@ -114,9 +114,17 @@ FROM `storehouses_products`
 ORDER BY IF (`value` = 0,1,0), `value`;
 
 -- 6. Подсчитайте средний возраст пользователей в таблице users
-
+SELECT 
+sum(IF (DATE_FORMAT(NOW(), '%m%d') >= DATE_FORMAT(`birthday`, '%m%d'),DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(`birthday`, '%Y'),DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(`birthday`, '%Y')-1))/COUNT(`birthday`) AS avarage_age
+FROM users;
 
 
 -- 7. Подсчитайте количество дней рождения, которые приходятся на каждый из дней
 --    недели. Следует учесть, что необходимы дни недели текущего года,
 --    а не года рождения.
+SELECT 
+DATE_FORMAT(CONCAT(DATE_FORMAT(NOW(), "%Y-"), DATE_FORMAT(`birthday`, '%m-%d')), '%w') as day_of_week, COUNT(*)
+FROM `users`
+GROUP BY day_of_week
+ORDER BY day_of_week;
+
