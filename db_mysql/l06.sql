@@ -1,5 +1,5 @@
 /*
- * Студент: Папко Роман.
+Студент: Папко Роман.
 Geekbrains. Факультет python-разработки.
 Четверть 1. Базы данных.
 Домашнее задание №6
@@ -8,45 +8,24 @@ Geekbrains. Факультет python-разработки.
    человека, который больше всех общался с выбранным пользователем.
 2. Подсчитать общее количество лайков, которые получили пользователи младше 10 лет.
 3. Определить кто больше поставил лайков (всего): мужчины или женщины
- */
+*/
 -- 1. Пусть задан некоторый пользователь. Из всех пользователей соц. сети найдите
 --    человека, который больше всех общался с выбранным пользователем.
 USE `vk`;
-SET @user_id := 17;
+SET @user_id = 17;
+SELECT * FROM `users`;
+SELECT * 
 
-SELECT @user_id + `to_user_id` AS m,COUNT(*) AS mes
-FROM `messages`
-WHERE `from_user_id` = @user_id
-GROUP BY `m`
-ORDER BY `m` ASC
-;
-SELECT @user_id + `from_user_id` AS m,COUNT(*) AS mes
-FROM `messages`
-WHERE `to_user_id` = @user_id
-GROUP BY `m`
-ORDER BY `m` ASC 
+                                                                                                                                                                                                                                                                                                                                                                      ,609 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaR `from_user_id` = @user_id;
+
+7  
+SELECT `users`.`id`,`messages`.`to_user_id`
+FROM `users`,`messages`
+WHERE `messages`.`to_user_id` = @user_id
 ;
 
-SELECT *
-FROM
-(
-SELECT @user_id + `to_user_id` AS `s`,COUNT(*) AS `cm`
-FROM `messages`
-WHERE `from_user_id` = @user_id
-GROUP BY `s`
-ORDER BY `s` ASC
-) AS t,
-(
-SELECT @user_id + `from_user_id` AS `s`,COUNT(*) AS `cm`
-FROM `messages`
-WHERE `to_user_id` = @user_id
-GROUP BY `s`
-ORDER BY `s` ASC 
-) AS f
--- WHERE `t`.`s` = `f`.`s`
-;
--- Как просуммировать значения mes  из 2-х выборок на основании m соответствия?
-/*
+
+
 -- 2. Подсчитать общее количество лайков, которые получили пользователи младше 10 лет.
 SELECT COUNT(*) AS 'Лайки пользаков моложе 10 лет'
 FROM `likes` 
@@ -71,4 +50,3 @@ GROUP BY `пол`
 ORDER BY 2 DESC
 LIMIT 1
 ;
-*/
