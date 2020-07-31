@@ -1,4 +1,4 @@
-#!
+#! +
 """
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
@@ -24,3 +24,14 @@ Geekbrains. Факультет python-разработки
 Введите число, которое требуется перевернуть: 123
 Перевернутое число: 321
 """
+
+def reverse_number(num, rn=''):
+    if num < 10:
+        rn += str(num)
+        print(f'Перевернутоe число: {rn}')
+        return
+    else:
+        rn += str(num%10)
+        reverse_number(num//10, rn)
+        
+reverse_number(int(input(f'Введите число: ')))

@@ -1,4 +1,4 @@
-#!
+#! +
 """
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
@@ -18,3 +18,33 @@ Geekbrains. Факультет python-разработки
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+sym_table(num = 32, count = 1):
+    if num >=128:
+        return
+    else:
+        if count < 10:
+            print(f'{num} - {chr(num)} ', end="")
+        else:
+            print(f'{num} - {chr(num)}')
+            count = 0
+        sym_table(num + 1, count + 1)
+
+sym_table()
+from random import randint as ri
+
+def guess_number(n, count = 1):
+    unum = int(input(f'Угадайте число от 1 до 100: '))
+    if count > 10:
+        print(f'Вы угадали. Загадано число {n}')
+        return
+    if unum == n:
+        print(f'Поздравляю, Вы угадали. Это число {n}. Использовано попыток - {count}')
+        return
+    elif unum > n:
+        print(f'Много!')
+        guess_number(n, count + 1)
+    else:
+        print(f'Мало!')
+        guess_number(n, count + 1)
+
+guess_number(ri(0,101))

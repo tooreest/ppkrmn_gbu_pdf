@@ -1,4 +1,4 @@
-#!
+#! +
 """
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
@@ -27,3 +27,16 @@ Geekbrains. Факультет python-разработки
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+def sym_table(num = 32, count = 1):
+    if num >=128:
+        return
+    else:
+        if count < 10:
+            print(f'{num} - {chr(num)} ', end="")
+        else:
+            print(f'{num} - {chr(num)}')
+            count = 0
+        sym_table(num + 1, count + 1)
+
+sym_table()
