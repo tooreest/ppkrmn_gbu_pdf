@@ -1,4 +1,4 @@
-#!
+#! +
 """
 Geekbrains. Факультет python-разработки
 Студент: Папко Роман.
@@ -47,10 +47,21 @@ def calc(act = False, n1 = False, n2 = False):
     elif act in actions:
         n1 = input(f'Введите первое число: ')
         n2 = input(f'Введите второе число: ')
-        
-        
-        print(f'{n1} {act} {n2} = {float(n1) + float(n2)}')
-        calc()
+        if act == '+':
+            print(f'{n1} {act} {n2} = {float(n1) + float(n2)}')
+            calc()
+        elif act == '-':
+            print(f'{n1} {act} {n2} = {float(n1) - float(n2)}')
+            calc()
+        elif act == '*':
+            print(f'{n1} {act} {n2} = {float(n1) * float(n2)}')
+            calc()
+        elif act == '/':
+            try:
+                print(f'{n1} {act} {n2} = {float(n1) / float(n2)}')
+            except ZeroDivisionError:
+                print(f'На ноль делить нельзя!!!')
+            calc()
     else:
         print(f'Введен не верный знак операции. Введите заново.')
         calc()

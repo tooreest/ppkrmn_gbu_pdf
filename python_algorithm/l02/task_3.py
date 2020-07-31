@@ -33,5 +33,5 @@ def reverse_number(num, rn=''):
     else:
         rn += str(num%10)
         reverse_number(num//10, rn)
-        
+
 reverse_number(int(input(f'Введите число: ')))
