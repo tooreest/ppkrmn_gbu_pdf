@@ -22,3 +22,37 @@ Geekbrains. Факультет python-разработки
 И примените ее к двум своим функциям.
 """
 
+from random import randint as ri
+from datetime import datetime as dt
+
+def time_test(func):
+    def wrap(*args, **kwargs):
+        start_time = dt.today()
+        
+        func(*args, **kwargs)
+        
+        end_time = dt.today()
+        working = end_time - start_time
+        print(f'Функция {func.__name__} проработала {working} секунд')
+    return wrap
+    
+@time_test   
+def gen_list(num_of_elements):
+    lst = [i for i in range(0, num_of_elements)]
+    print(len(lst))
+    for i in range(0, num_of_elements):
+        lst.pop()
+    print(lst)
+    
+@time_test 
+def gen_dict(num_of_elements):
+    dct = {i:i for i in range(0, num_of_elements)}
+    print(len(dct))
+    for i in range(0, num_of_elements):
+        dct.pop(i)
+    print(dct)
+
+
+num_of_elems = 10000000
+mylist = gen_list(num_of_elems)
+mydict = gen_dict(num_of_elems)
